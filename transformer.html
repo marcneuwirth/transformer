@@ -1,0 +1,75 @@
+<html>
+    <head>
+        <title>HTML5, roll out</title>
+        
+		<style>
+			body {
+				-webkit-perspective: 800;
+                -webkit-perspective-origin: 50% 20%;
+				-webkit-transform-style: preserve-3d;
+				overflow: none;
+				text-align: center;
+                background: #000;
+                color: #fff;
+			}
+
+			#transformer {
+				-webkit-transform-style: preserve-3d;
+				-webkit-transform: translateZ(2000px);
+				-webkit-backface-visibility: hidden;   
+			}
+            
+            .active #transformer {
+                -webkit-animation: transform 2.5s;
+			}
+            
+            @-webkit-keyframes transform{
+                40%{-webkit-transform:translateZ(-300px);}
+                60%{-webkit-transform:translateZ(-300px) rotateY(180deg);}
+                100%{-webkit-transform:translateZ(2000px) rotateY(180deg);}
+            }
+
+			img {
+				width:512px;
+				height: 512px;
+			}
+
+			#first, #second {
+				-webkit-backface-visibility: hidden;
+				display: inline-block;
+			}
+
+			#first {
+				margin-right: -512px;
+				-webkit-transform: rotateY(180deg);
+			}
+            
+		</style>
+	</head>
+	<body>
+		<h1>Press any key to Transform!</h1><span>(on a webkit browser)</span>
+		<div id="transformer">
+			<div id="first">
+				<img src="http://www.w3.org/html/logo/downloads/HTML5_Badge_512.png" alt="HTML5 Powered" title="HTML5 Powered" class="backwards">
+			</div>
+			<div id="second">
+				<img src="http://www.w3.org/html/logo/downloads/HTML5_Badge_512.png" alt="HTML5 Powered" title="HTML5 Powered">
+			</div>
+		</div>
+	</body>
+	<script>	
+	//debounce
+	var press = false;
+	document.body.onkeydown = function() {
+		if(!press) {
+			press = true;
+            
+            document.body.classList.add('active');
+            setTimeout(function() {
+                document.body.classList.remove('active');
+                press = false;
+            }, 2000);
+        }
+	};
+	</script>
+</html>
